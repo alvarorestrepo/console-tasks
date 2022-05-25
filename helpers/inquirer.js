@@ -79,8 +79,71 @@ const LeerInput = async (message) => {
   return desc;
 };
 
+const listadoTareasBorrar = async (tareas = []) => {
+  const choices = tareas.map((tarea, index) => {
+    const i = `${index + 1}.`.green;
+    return {
+      value: tarea.id,
+      name: `${i} ${tarea.desc}`,
+    };
+  });
+
+  choices.unshift({
+    value: "0",
+    name: "0.".green + "Cancelar",
+  });
+
+  const questions = [
+    {
+      type: "list",
+      name: "id",
+      message: "Seleccione la tarea a borrar",
+      choices,
+    },
+  ];
+  const { id } = await inquirer.prompt(questions);
+  return id;
+};
+
+const confirmar = async (message) => {
+  const questions = [
+    {
+      type: "confirm",
+      name: "ok",
+      message,
+    },
+  ];
+  const { ok } = await inquirer.prompt(questions);
+  return ok;
+};
+
+const mostrarListadoCheckList = async (tareas = []) => {
+  const choices = tareas.map((tarea, index) => {
+    const i = `${index + 1}.`.green;
+    return {
+      value: tarea.id,
+      name: `${i} ${tarea.desc}`,
+      checked: tarea.completadoEn ? true : false,
+    };
+  });
+
+  const questions = [
+    {
+      type: "checkbox",
+      name: "ids",
+      message: "Seleccione las tareas a completar",
+      choices,
+    },
+  ];
+  const { ids } = await inquirer.prompt(questions);
+  return ids;
+};
+
 module.exports = {
   inquirerMenu,
   pausa,
   LeerInput,
+  listadoTareasBorrar,
+  confirmar,
+  mostrarListadoCheckList,
 };
