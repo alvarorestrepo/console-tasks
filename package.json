@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/alvarorestrepo/console-tasks/issues"
   },
-  "homepage": "https://github.com/alvarorestrepo/console-tasks#readme"
+  "homepage": "https://github.com/alvarorestrepo/console-tasks#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "inquirer": "^8.2.4"
+  }
 }
